@@ -1,0 +1,100 @@
+#event{
+  border: none;
+   line-height: 1.2;  
+   position: relative;
+  border-radius:16px;
+  overflow: clip;
+  box-shadow: rgba(191, 190, 190, 0.35) 0px 5px 15px;
+}
+#event_status{
+  position: absolute;
+  top: 0;
+  background-color: green;
+  left: 2%;
+  padding: 1% 1.7%;
+  box-shadow: rgba(10, 10, 10, 0.35) 0px 5px 15px;
+  border-radius: 10px;
+}
+#event_day{
+  position: absolute;
+  top: 0;
+  background-color: red;
+  right: 2%;
+   padding: 1% 1.7%;
+   box-shadow: rgba(10, 10, 10, 0.35) 0px 5px 15px;
+   border-radius: 10px;
+}
+#event_img{
+  height: 30vh;
+  width: 100%;
+}
+.eventinfo_box{
+  display: flex;
+  align-items: center;
+  gap:2%;
+   color: rgb(188, 188, 188);
+  font-weight: bold;
+  flex-basis: 25%;
+}
+#event_textbox{
+  padding:0.1vh 1vw;
+ background: #0f0c29;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #24243e, #302b63, #0f0c29);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #24243e, #302b63, #0f0c29); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+#lower_text_box{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#event_details_box{
+  display: flex;
+  align-items: center;
+  gap: 0.5vw;
+  background: #1f4037;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #99f2c8, #1f4037);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #99f2c8, #1f4037); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+padding: 0 4%;
+border-radius: 16px;
+color: black;
+font-weight: bold;
+cursor: pointer;
+box-shadow: rgba(10, 10, 10, 0.35) 0px 5px 15px;
+text-shadow: 2px 2px 8px rgba(48, 46, 46, 0.85);
+}
+#event_heading{
+  text-align: center;
+  font-size: 2vw;
+  font-weight: bolder;
+}
+#event_description{
+  font-style: italic;
+  font-size: 1.3vw;
+  color: rgb(140, 139, 139);
+}
+#event_text_details{
+  text-decoration: none;
+  color: black;
+}
+#event_price{
+  display: flex;
+  gap: 0.3vw;
+}
+#strike_money{
+  text-decoration: line-through;
+}
+#strike_price{
+  font-size: 1.6vw;
+  color: rgb(9, 91, 77);
+  font-weight: bold;
+}
+#real_price{
+  font-size: 2vw;
+  color: red;
+  font-weight: bold;
+}
+#strike_price,#real_price{
+  display: flex;
+  align-items: center;
+}

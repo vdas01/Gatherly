@@ -1,0 +1,154 @@
+#filter_conatiner {
+  padding: 1.5vh;
+  display: flex;
+  gap: 2vw;
+}
+
+#search_input {
+  background: #C9D6FF;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #E2E2E2, #C9D6FF);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #E2E2E2, #C9D6FF);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  font-weight: bolder;
+  font-size: 1rem;
+  color: black;
+}
+
+#filter_btn {
+  min-width: 8vw;
+  border-radius: 8px;
+  font-size: 1.3vw;
+  border: none;
+  cursor: pointer;
+  background: #fc4a1a;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #f7b733, #fc4a1a);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #f7b733, #fc4a1a);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+#event_box {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 2vw;
+  padding: 0.5vw;
+}
+
+.popup-box {
+  position: absolute;
+  top: 60%;
+  left: 20%;
+  z-index: 2;
+  display: flex;
+  width: 50vw;
+  border-radius: 16px;
+  margin: auto;
+  background: #0F2027;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #2C5364, #203A43, #0F2027);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  min-height: 20vh;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+
+.popup-left {
+  flex-basis: 30%;
+  padding: 1% 1%;
+}
+
+.popup-right {
+  border-left: 2px solid rgb(96, 96, 96);
+  flex-basis: 70%;
+}
+
+.popup_menu {
+  color: rgb(112, 110, 110);
+  border-radius: 16px;
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(11, 161, 70, 0.3);
+  cursor: pointer;
+  text-align: center;
+  margin: 2% 0%;
+  background: #659999;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #f4791f, #659999);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #f4791f, #659999);
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.popup_active{
+  background: #076a6a;
+  /* fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #a64c0b, #076a6a);
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #a64c0b, #076a6a);
+  color: rgb(219, 215, 215);
+}
+
+.price-container {
+  padding: 2% 4%;
+  font-size: 1.5vw;
+}
+
+.price-range {
+  height: 2vh;
+}
+
+.search-box {
+  position: relative;
+  width: 20vw;
+}
+
+.search-box input {
+  width: 88%;
+  padding: 5% 0% 5% 12%;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  outline: none;
+}
+
+.search-icon {
+  position: absolute;
+  left: 3%;
+  top: 50%;
+  transform: translateY(-50%);
+  color: gray;
+  font-size: 1.3rem;
+  font-weight: bolder;
+  color: black;
+}
+
+#apply_btn {
+  position: absolute;
+  right: 1%;
+  bottom: 7%;
+  font-weight: bold;
+  font-size: 95%;
+  /* margin-top: 5vh; */
+  border: none;
+  border-radius: 999px;
+  background: #232526;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #414345, #232526);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #1382f1, #4a097f); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+padding: 1% 5%;
+box-shadow: rgba(109, 108, 108, 0.35) 0px 5px 15px;
+cursor: pointer;
+color: rgb(201, 198, 198);
+}
+.close_icon{
+  position: absolute;
+  right: 1%;
+  top: 5%;
+  font-size: 2rem;
+  font-weight: bolder;
+  cursor: pointer;
+  color: rgb(169, 165, 165);
+}

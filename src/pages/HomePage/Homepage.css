@@ -1,0 +1,43 @@
+#group_btn {
+    background: linear-gradient(to right, #0f2027, #203a43, #2c5364); 
+    padding: 1.2vw 1.5vw;
+    border-radius: 999px;
+    max-width: 10vw;
+    text-align: center;
+    font-size: 1.2rem;
+    text-shadow: 2px 2px 8px rgba(4,2,1,0.85);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    cursor: pointer;
+}
+
+#header {
+    background-color: rgb(245, 142, 15);
+    padding-top: 5vh;
+    height: 97vh;
+     background-image: url('../../assets/house_party3.jpg');
+  background-size: cover;     /* makes image cover entire area */
+  background-position: center; /* centers the image */
+  background-repeat: no-repeat;
+  width: 100%;
+}
+
+#first_tab{
+ color: white;
+    padding: 2% 15%;   
+     font-weight: bold;
+}
+
+#center_head{
+    font-size: 3.5rem;
+    font-weight: bold;
+    text-shadow: 2px 2px 8px rgba(4,2,1,0.85);
+}
+
+#location_box{
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+    font-size: 1.5vw;
+    text-shadow: 2px 2px 8px rgba(4,2,1,0.85);
+}

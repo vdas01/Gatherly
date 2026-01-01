@@ -1,0 +1,8 @@
+.eventinfo_box{
+  display: flex;
+  align-items: center;
+  gap:2%;
+   color: rgb(188, 188, 188);
+  font-weight: bold;
+  flex-basis: 25%;
+}

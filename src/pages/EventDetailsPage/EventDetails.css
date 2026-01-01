@@ -1,0 +1,113 @@
+
+#price_cart{
+  
+    width: 30vw;
+    line-height: 1;
+    padding-bottom: 1.4vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-height: 50vh;
+    border-radius: 16px;
+    background: #141E30;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+#event_price{
+  display: flex;
+  gap: 0.3vw;
+  line-height: 0.2;
+    align-self:flex-start;
+   margin-left: 10vw;
+}
+#strike_money{
+  text-decoration: line-through;
+}
+#strike_price{
+  font-size: 1.6vw;
+    color: rgb(159, 84, 84);
+  font-weight: bold;
+  
+}
+#real_price{
+  font-size: 2vw;
+  color: rgb(7, 170, 51);
+  font-weight: bold;
+
+}
+#strike_price,#real_price{
+  display: flex;
+  align-items: center;
+}
+#middle_right{
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+    padding:0 1vw;
+background: #41295a;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #280937, #2d1943);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #2F0743, #41295a); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    border-radius: 16px;
+    cursor: pointer;
+}
+#middle_last{
+    display: flex;
+align-items: center;
+    gap: 1vw;
+}
+#checkout_btn{
+    border-radius: 16px;
+    border: none;
+    background: #c31432;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #240b36, #c31432);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #240b36, #c31432); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+font-size: 90%;
+padding: 2vh 3vw;
+box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+cursor: pointer;
+font-weight: bolder;
+margin-top: 4vh;
+color: wheat;
+}
+#checkout_btn:hover{
+    color: black;
+}
+#middle{
+    display: flex;
+    align-items: center;
+    gap: 8vw;
+}
+#quantity_head{
+   align-self:flex-start;
+   margin-left: 10vw;
+}
+#middle_left,#total_quantity_text,#quantity_head{
+    color: rgb(135, 135, 135);
+    font-size: 1.2rem;
+}
+#ticket_quant{
+    color: white;
+}
+#total_price{
+    font-size: 1.2rem;
+     color: rgb(7, 170, 51);
+}
+#desc_box{
+    width: 70vw;
+    padding:1vh 1vw;
+    border-radius: 16px;
+    background: #141E30;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #243B55, #141E30);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #243B55, #141E30); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+#middle_box{
+    display: flex;
+    gap: 1vw;
+    margin-top: 2vh;
+    padding: 0 1vw;
+}
+#real_price_text{
+    text-shadow: 2px 2px #030202;
+}
