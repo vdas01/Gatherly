@@ -4,12 +4,14 @@ import com.example.gatherly.dtos.UserAdditionalData;
 import com.example.gatherly.dtos.UserDto;
 import com.example.gatherly.entity.User;
 import com.example.gatherly.enums.UserStatus;
+import com.example.gatherly.exception.ProgramException;
 import com.example.gatherly.mappers.UserMapper;
 import com.example.gatherly.repository.UserRepository;
 import com.example.gatherly.utils.ObjectMapperUtils;
 import com.example.gatherly.utils.SecurityUtil;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -24,7 +26,7 @@ public class UserService {
    public UserDto getUserByUserName(String userName) {
      return userRepository.findByUserName(userName)
          .map(UserMapper.INSTANCE::userToUserDto)
-         .orElseThrow(() -> new RuntimeException("No user found with username," + userName));
+         .orElseThrow(() -> new ProgramException(HttpStatus.NOT_FOUND,"No user found with username," + userName));
    }
 
 
@@ -61,6 +63,6 @@ public class UserService {
             return UserMapper.INSTANCE.userToUserDto(user);
          }
       }
-      throw new RuntimeException("Bad Credentials");
+      throw new ProgramException("Bad Credentials");
    }
 }

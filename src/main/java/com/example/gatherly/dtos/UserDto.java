@@ -10,6 +10,7 @@ import lombok.Setter;
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class UserDto {
+   private Long id;
    private String userName;
    private String firstName;
    private String lastName;
@@ -17,7 +18,7 @@ public class UserDto {
    private String email;
    private String phone;
    private String address;
-   private UserRole role;
+   private UserRole role = UserRole.PARTICIPANT;
    private String gender;
    private UserStatus userStatus;
 }

@@ -5,6 +5,7 @@ import com.example.gatherly.dtos.EventDto;
 import com.example.gatherly.dtos.PageResponse;
 import com.example.gatherly.entity.Event;
 import com.example.gatherly.entity.User;
+import com.example.gatherly.exception.ProgramException;
 import com.example.gatherly.mappers.EventMapper;
 import com.example.gatherly.repository.EventRepository;
 import com.example.gatherly.repository.UserRepository;
@@ -12,6 +13,7 @@ import com.example.gatherly.utils.ObjectMapperUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -47,7 +49,7 @@ public class EventService {
    public EventDto createEvent(EventDto eventDto) {
       Event event = new Event();
       if(Objects.nonNull(eventDto.getId())) {
-         event = eventRepository.findById(eventDto.getId()).orElseThrow(() -> new RuntimeException("No event found for id," + eventDto.getId()));
+         event = eventRepository.findById(eventDto.getId()).orElseThrow(() -> new ProgramException(HttpStatus.NOT_FOUND,"No event found for id," + eventDto.getId()));
       }
       User user = userRepository.findByUserName("vishal123").orElse(null);
       EventAdditionalData additionalData = ObjectMapperUtils.convertJsonToObjectWithDefault(event.getAdditionalData(), EventAdditionalData.class);

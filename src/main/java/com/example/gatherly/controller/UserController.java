@@ -4,7 +4,9 @@ import com.example.gatherly.dtos.UserDto;
 import com.example.gatherly.service.UserService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,9 +16,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
+@Slf4j
 @RestController
 @RequestMapping("/api/user")
 @RequiredArgsConstructor
+@CrossOrigin(
+   origins = "http://localhost:5173",
+   allowCredentials = "true"
+)
 public class UserController {
    private final UserService userService;
 
@@ -26,7 +33,7 @@ public class UserController {
    }
 
    @PostMapping
-   public UserDto createOrUpdateUser(@RequestBody UserDto userDto, @RequestParam Boolean isUpdateUser) throws JsonProcessingException {
+   public UserDto createOrUpdateUser(@RequestBody UserDto userDto, @RequestParam(required = false) Boolean isUpdateUser) throws JsonProcessingException {
      return userService.createUser(userDto,isUpdateUser);
    }
 
@@ -38,6 +45,7 @@ public class UserController {
 
    @GetMapping("/login")
    public UserDto login(@RequestParam String username, @RequestParam String password) {
+      log.info("username: {}, password: {}", username, password);
       return userService.login(username, password);
    }
 }
