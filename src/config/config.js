@@ -1,3 +1,5 @@
+import axios from "axios";
+import { LOCATION_API } from './apis';
 
 export const EVENT_DETAILS = [
     {
@@ -59,3 +61,38 @@ export const PASS_DETAILS = [
         image: "path/to/harry_potter_image.jpg"
     }
 ]
+
+export const GET_CURRENT_LOCATION = () => {
+  return new Promise((resolve, reject) => {
+    if (!navigator.geolocation) {
+      resolve("Unknown location");
+      return;
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      async (position) => {
+        try {
+          const lat = position.coords.latitude;
+          const lon = position.coords.longitude;
+
+          const res = await axios.get(LOCATION_API(lat, lon));
+          const data = res.data;
+          const userCity =
+            data.address.city ||
+            data.address.town ||
+            data.address.village ||
+            "Unknown location";
+
+          resolve(userCity); // ✅
+        } catch (err) {
+          console.error(err);
+          resolve("Unknown location");
+        }
+      },
+      (error) => {
+        console.error("Error obtaining location:", error);
+        resolve("Unknown location");
+      }
+    );
+  });
+};

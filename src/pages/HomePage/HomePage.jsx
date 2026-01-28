@@ -1,30 +1,21 @@
-import axios from 'axios';
+import axios from 'axios';  
 import './Homepage.css'
 import { Navbar } from '../../components/Navbar/Navbar'
 import { useEffect, useState } from "react";
 import { FaLocationDot } from "react-icons/fa6";
 import { LOCATION_API } from '../../config/apis';
+import { GET_CURRENT_LOCATION } from '../../config/config';
 
 export function HomePage() {
     const [city, setCity] = useState("");
 
-    useEffect(() => {
-    navigator.geolocation.getCurrentPosition(async (pos) => {
-      const lat = pos.coords.latitude;
-      const lon = pos.coords.longitude;
-
-      const res = await axios.get(LOCATION_API(lat,lon));
-      const data = res.data
-    
-      const userCity =
-        data.address.city ||
-        data.address.town ||
-        data.address.village ||
-        "Unknown location";
-
-      setCity(userCity);
-    });
-  }, []);
+//     useEffect(() => {
+//       const fetchLocation = async () => {
+//         const userCity = await GET_CURRENT_LOCATION;
+//         setCity(userCity);
+//       };
+//       fetchLocation();  
+//   }, []);
 
     return (
     <>
@@ -33,7 +24,7 @@ export function HomePage() {
         <div id='first_tab'>
             <div id='location_box'>
                 <FaLocationDot />
-                <h4 id='location_heading'>{city}</h4>
+                {/* <h4 id='location_heading'>{city ? city : "Unknown location"}</h4> */}
             </div>
             <h2 id='center_head'>Weekly hangouts<br/> that turn vibes <br/>into friendships.</h2>
             <p id="group_btn">

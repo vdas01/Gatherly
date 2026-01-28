@@ -1,4 +1,10 @@
+#login_container{
+    height: 100vh;
+    background: #1f4037;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #99f2c8, #1f4037);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #99f2c8, #1f4037); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
+}
 #left_login_box{
     flex-basis: 100%;
     text-align: center;
@@ -8,10 +14,6 @@
     padding: 2%;
     display: flex;
     align-items: center;
-}
-#login_container{
-    display: flex;
-      color: white;
 }
 #login_img{
     width: 100%;
@@ -24,7 +26,6 @@
     padding: 0.9rem 1rem;
     font-size: 1vw;
     width: 20vw;
-  
     font-weight: bold;
     background-color: white;
     border-radius: 16px;
@@ -36,6 +37,9 @@
      background: linear-gradient(to right, gray, black);
      font-size: 1.4rem;
      border: none;
+}
+input{
+    color: rgb(71, 70, 70) !important;
 }
 #email_input{
     margin-bottom: 2vh;
@@ -72,16 +76,36 @@
     font-weight: bold;
     color: black;
 }
-#login_container{
-    height: 97vh;
-    background: #1f4037;  /* fallback for old browsers */
-background: -webkit-linear-gradient(to right, #99f2c8, #1f4037);  /* Chrome 10-25, Safari 5.1-6 */
-background: linear-gradient(to right, #99f2c8, #1f4037); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 
-}
 #email_input, #pass_input{
     border: none;
     outline: none;
     cursor:text;
+}
+#res_error_toast{
+    background: transparent;
+    background-color: rgb(193, 114, 114);
+     width: fit-content;
+     margin: auto;
+     color: rgb(162, 21, 21);
+     position: relative;
+     margin-bottom: 2vh;
+     padding: 1vh 1.6vw;
+     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+     border-radius: 10px;
+     display: flex;
+     align-items: center;
+}
+#toast_txt{
+    padding-right: 0.5vw;
+    border-right: 1px solid rgb(91, 20, 20);
+    margin-right: 1.2vw;
+    font-weight: bolder;
+}
+#toast_cross{
+    font-size: 1.5vw;
+    cursor: pointer;
+     font-weight: bold;
+     color: rgb(133, 5, 5);
 }
 

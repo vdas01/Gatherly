@@ -1,15 +1,16 @@
 
 #signup_container{
     border: 2pz solid blue;
-    display: flex;
+    /* display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; */
      background: #1f4037;  /* fallback for old browsers */
 background: -webkit-linear-gradient(to right, #99f2c8, #1f4037);  /* Chrome 10-25, Safari 5.1-6 */
 background: linear-gradient(to right, #99f2c8, #1f4037); 
 height: 100vh;
 }
 #signup_form{
+    margin: auto;
     display: flex;
     gap: 2vh;
     flex-direction: column;
@@ -26,11 +27,15 @@ border-radius: 16px;
     display: flex;
     gap: 1vw;
     justify-content: flex-start;
+    align-items: center;
+     background-color: #3B3B3B;
+      color: rgb(108, 108, 108);
+      height: 5vh;
     width: 70%;
-     padding:2% 4%;
-     background-color: rgb(64, 64, 64);
-      border-radius: 16px;
-      color: rgb(131, 131, 131);
+    border-radius: 16px;
+    border: none;
+    padding:1% 4%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 .gender-box{
     display: flex;
@@ -67,4 +72,6 @@ background: linear-gradient(to right, #4CA1AF, #2C3E50); /* W3C, IE 10+/ Edge, F
     font-size: 3vw;
      color: black;
     margin-bottom: 3vh;
+    text-shadow: 1px 1px 8px rgba(93, 93, 93, 0.3);
+   text-align: center;
 }

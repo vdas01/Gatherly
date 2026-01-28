@@ -1,0 +1,151 @@
+#profilePage_container{
+    height: 100vh;
+    background: #0F2027;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #2C5364, #203A43, #0F2027);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #2C5364, #203A43, #0F2027); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+.user_info_top{
+    /* border: 2px solid red; */
+    display: flex;
+}
+#profilepic_box{
+    height: 10vh;
+    width: 10vw;
+     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+#user_profile_pic{
+    width: 100%;
+    object-fit: cover;
+    height: 100%;
+}
+#user_info_left_box{
+    /* border: 2px solid green; */
+    flex-basis: 30%;
+    padding: 1vh 1.2vw;
+    line-height: 0.1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#user_info_heading{
+    color: #994a09;
+    height: 1vh;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+  font-size: 2.5vw;
+  font-weight: bolder;
+  line-height: 0.1;
+}
+#user_info_profession{
+    color: rgb(125, 160, 57);
+    font-style: italic;
+    font-size: 1.2vw;
+}
+#social_media_box{
+    /* border: 2px solid yellow; */
+}
+#reputation_box{
+    /* border: 2px solid green; */
+    display: flex;
+    margin-top: 1.7vh;
+    gap: 1%;
+    justify-content: space-evenly;
+    width: 80%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.reputation_child{
+    display: flex;
+    flex-direction: column;
+    gap: 2vh;
+    /* border: 2px solid green; */
+    align-items: center;
+    justify-content: center;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    color: rgb(169, 95, 95);
+}
+/* #badge_box{
+     display: flex;
+    margin-top: 1.7vh;
+    gap: 1%;
+   padding: 0 1vw;
+    align-items: center;
+    width: 70%;
+    height: auto;
+    flex-wrap: wrap;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+.badge {
+  min-width: 0;
+  max-width: 100%;
+  /* padding: 1.3vh 1vw; */
+  /* white-space: normal;
+  overflow-wrap: break-word;
+} */
+#social_media_box{
+    display: flex;
+    margin-top: 1.7vh;
+    gap: 5px;
+    padding: 1vh 1vw;
+    justify-content:flex-start;
+    max-width: 70%;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+}
+#edit_profile_btn{
+    margin-top: 5vh;
+    padding: 1vh 1.5vw;
+    font-size: 1.2vw;
+    font-weight: bold;
+    background: linear-gradient(to right, gray, black);
+    border-radius: 16px;
+    cursor: pointer;
+    color: rgb(19, 17, 17);
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border: none;
+    background: #FBD3E9;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #BB377D, #FBD3E9);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #BB377D, #FBD3E9); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+#user_info_right_box{
+    /* border: 2px solid yellow; */
+    flex-basis: 70%;
+    padding: 1vh 1.5vw;
+    
+}
+#profilepic_box{
+    width: 20vw;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: tomato;
+  overflow: hidden;
+  height: auto !important;
+}
+#bio_info{
+     display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 2vw;
+  padding: 0.5vw;
+}
+.bio_info_box{
+  background: #134E5E;  /* fallback for old browsers */
+background: -webkit-linear-gradient(to right, #71B280, #134E5E);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(to right, #71B280, #134E5E); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+padding: 1vh 1vw;
+border-radius: 16px;
+box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+display: flex;
+align-items: flex-start;
+gap: 0.5vw;
+font-size: 1.3vw;
+}
+.bio_text{
+    font-weight: bolder;
+}
+.bio_text,.bio_label{
+ color: black;   
+}
+#edit_buttons{
+    display: flex;
+    gap: 2vw;
+}

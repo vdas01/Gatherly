@@ -7,6 +7,7 @@ import { EventPage } from './pages/EventPage/EventPage'
 import { Subscription } from './pages/SubscriptionPage/Subscription'
 import { EventDetails } from './pages/EventDetailsPage/EventDetails'
 import { CreateEventPage } from './pages/CreateEventPage/CreateEventPage'
+import { ProfilePage } from './pages/ProfilePage/ProfilePage'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
       <Route path='/subscriptions' element={<Subscription/>} />
       <Route path='/events/:id' element={<EventDetails/>} />
       <Route path='/createEvent' element={<CreateEventPage/>} />
+      <Route path='/profile' element={<ProfilePage/>} />
     </Routes>
     </>
   )

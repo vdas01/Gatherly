@@ -1,0 +1,26 @@
+#res_error_toast{
+    background: transparent;
+    background-color: rgb(193, 114, 114);
+     width: fit-content;
+     margin: auto;
+     color: rgb(162, 21, 21);
+     position: relative;
+     margin-bottom: 2vh;
+     padding: 1vh 1.6vw;
+     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+     border-radius: 10px;
+     display: flex;
+     align-items: center;
+}
+#toast_txt{
+    padding-right: 0.5vw;
+    border-right: 1px solid rgb(91, 20, 20);
+    margin-right: 1.2vw;
+    font-weight: bolder;
+}
+#toast_cross_error{
+    font-size: 1.5vw;
+    cursor: pointer;
+     font-weight: bold;
+     color: rgb(133, 5, 5);
+}
