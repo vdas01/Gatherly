@@ -19,6 +19,7 @@ public interface UserMapper {
 
 
    @Mapping(source = "phone", target = "phoneNumber")
+   @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
    void userDtoToUser(UserDto userDto, @MappingTarget User user);
 
    @Mapping(target = "phone", source = "phoneNumber")
