@@ -35,9 +35,9 @@ public class JwtUtil {
          .compact();
    }
 
-   public String extractUsernameFromRefresh(String token) {
+   public String extractUsername(String token) {
       return Jwts.parserBuilder()
-         .setSigningKey(REFRESH_SECRET_KEY.getBytes())
+         .setSigningKey(ACCESS_SECRET_KEY.getBytes())
          .build()
          .parseClaimsJws(token)
          .getBody()
@@ -46,7 +46,7 @@ public class JwtUtil {
 
    public boolean validateToken(String token) {
       try {
-//         extractUsername(token);
+         extractUsername(token);
          return true;
       } catch (Exception e) {
          return false;
