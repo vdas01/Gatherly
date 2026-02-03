@@ -11,9 +11,37 @@ const api = axios.create({
 
 // 🔥 Add async header here
 api.interceptors.request.use(async (config) => {
-  const city = await GET_CURRENT_LOCATION();
+  const city = await GET_CURRENT_LOCATION() || "Bengaluru";
   config.headers["X-LOCATION-ID"] = city;
+  config.headers["Authorization"] = `Bearer ${sessionStorage.getItem("accessToken") || ""}`;
   return config;
 });
+
+axios.interceptors.response.use(
+  res => res,
+  async err => {
+    const originalRequest = err.config;
+
+    if (
+      err.response?.status === 401 &&
+      !originalRequest._retry &&
+      !originalRequest.url.includes("/auth/refresh")
+    ) {
+      originalRequest._retry = true;
+
+      const refresh = await axios.post(
+        "/auth/refresh",
+        {},
+        { withCredentials: true }
+      );
+
+      setAccessToken(refresh.data.accessToken);
+
+      return axios(originalRequest);
+    }
+
+    throw err;
+  }
+);
 
 export default api;

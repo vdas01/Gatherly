@@ -10,11 +10,11 @@ import { AuthContext } from '../../config/AuthProvider';
 export function Navbar(){
     const navigate = useNavigate();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const { username, setUserName } = useContext(AuthContext);
+    const { accessToken } = useContext(AuthContext);
     
     const handleLogOut = () => {
         setUserName(null);
-        sessionStorage.removeItem("username");
+        sessionStorage.removeItem("accessToken");
         setIsMenuOpen(false);
         navigate(0);
     }
@@ -33,13 +33,13 @@ export function Navbar(){
             {/* <p><Link to={`/profile`} className='event_bar'>User profile</Link></p> */}
         </div>
         <div id="right">
-            {username == null && 
+            {accessToken == null && 
             <>
             <Link className='btn-login' to={`/login`}>Login</Link>
                 <Link className='btn-sign' to={`/signup`}>Sign up</Link>
             </>
             }
-            {username != null &&
+            {accessToken != null &&
                 <div className='user_icon_container'>
                     <img src={USerPic} alt="profile_pic" id='user_profile_pic' onClick={() => setIsMenuOpen(!isMenuOpen)}/> 
                     {isMenuOpen &&

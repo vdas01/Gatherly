@@ -3,12 +3,12 @@ import { createContext, useState } from "react";
 export const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
-  const [username, setUserName] = useState(() => {
-    return sessionStorage.getItem("username") || null;
+  const [accessToken, setAccessToken] = useState(() => {
+    return sessionStorage.getItem("accessToken") || null;
   });
 
   return (
-    <AuthContext.Provider value={{ username, setUserName }}>
+    <AuthContext.Provider value={{ accessToken, setAccessToken }}>
       {children}
     </AuthContext.Provider>
   );

@@ -11,9 +11,5 @@ export const SIGNUP_API = (signupData,isUpdateUser) => api.post('user', signupDa
     }
 });
 
-export const GET_USER_INFO_API = (username) => api.get('user',{
-    params: {
-        userName: username
-    }
-});
+export const GET_USER_INFO_API = () => api.get('user');
 

@@ -14,7 +14,7 @@ export function LoginPage (){
             username: "",
             password: ""
           });
-    const { setUserName } = useContext(AuthContext);
+    const { setAccessToken } = useContext(AuthContext);
     const [responseData, setResponseData] = useState(null);
 
         
@@ -34,8 +34,9 @@ export function LoginPage (){
                if (response?.data?.errorCode) {
                     setResponseData(response.data);
                 }else if(response?.status === 200){
-                    setUserName(response.data?.userName);
-                    sessionStorage.setItem("username", response.data?.userName);
+                    console.log(response)
+                    setAccessToken(response.data?.accessToken);
+                    sessionStorage.setItem("accessToken", response.data?.accessToken);
                     navigate("/");
                 }
                 

@@ -5,6 +5,7 @@ import { useEffect, useState,useContext } from "react";
 import { Navbar } from "../../components/Navbar/Navbar";
 import { AuthContext } from "../../config/AuthProvider";
 import { GET_USER_INFO_API } from "../../config/apis";
+import { SIGNUP_API } from "../../config/apis";
 
 export function ProfilePage() {
     const {username} = useContext(AuthContext);
