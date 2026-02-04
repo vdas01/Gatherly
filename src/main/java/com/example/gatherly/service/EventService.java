@@ -60,4 +60,10 @@ public class EventService {
      return EventMapper.INSTANCE.eventToEventDto(eventRepository.saveAndFlush(event));
    }
 
+   public EventDto getEventById(Long id) {
+      return eventRepository.findById(id)
+         .map(EventMapper.INSTANCE::eventToEventDto)
+         .orElseThrow(() -> new ProgramException("No event found for id," + id));
+   }
+
 }

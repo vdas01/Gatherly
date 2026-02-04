@@ -2,6 +2,7 @@ package com.example.gatherly.dtos;
 
 import com.example.gatherly.enums.EventStatus;
 import com.example.gatherly.enums.EventType;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,9 +17,12 @@ public class EventDto {
    private String description;
    private String location;
    private String imageUrl;
+   @JsonFormat(pattern = "dd-MM-yyyy HH:mm")
    private LocalDateTime eventStartDate;
+   @JsonFormat(pattern = "dd-MM-yyyy HH:mm")
    private LocalDateTime eventEndDate;
    private BigDecimal eventPrice;
-   private EventStatus eventStatus;
+   private EventStatus eventStatus = EventStatus.AVAILABLE;
    private EventType eventType;
+   private Long noOfParticipants;
 }
