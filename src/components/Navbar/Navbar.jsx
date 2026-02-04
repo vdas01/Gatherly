@@ -10,10 +10,10 @@ import { AuthContext } from '../../config/AuthProvider';
 export function Navbar(){
     const navigate = useNavigate();
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const { accessToken } = useContext(AuthContext);
+    const { accessToken,setAccessToken } = useContext(AuthContext);
     
     const handleLogOut = () => {
-        setUserName(null);
+        setAccessToken(null);
         sessionStorage.removeItem("accessToken");
         setIsMenuOpen(false);
         navigate(0);

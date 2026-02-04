@@ -18,23 +18,23 @@ export default function Card({ event }) {
           <p id="event_description">{event.description}</p>
           <Info
             loc={event.location}
-            date={event.date}
+            date={`${event.startDate}  to  ${event.endDate}`}
             participants={event.participants}
           />
           <div id="lower_text_box">
             <div id="event_price">
               <span id="strike_price">
                 <MdCurrencyRupee />
-                <h6 id="strike_money">{event.strike_price}</h6>
+                <h6 id="strike_money">{event.strike_price || 0}</h6>
               </span>
               <span id="real_price">
                 <MdCurrencyRupee />
-                <h6>{event.real_price}</h6>
+                <h6>{event.price}</h6>
               </span>
             </div>
             <div id="event_details_box">
               <p>
-                <Link to={`/events/3`} id="event_text_details">
+                <Link to={`/events/${event.id}`} id="event_text_details">
                   View Details
                 </Link>
               </p>

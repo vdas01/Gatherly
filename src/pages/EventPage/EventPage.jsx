@@ -1,11 +1,12 @@
 import { IoIosSearch } from "react-icons/io";
 import { Navbar } from "../../components/Navbar/Navbar";
 import './EventPage.css'
-import { useState } from "react";   
 import { EVENT_DETAILS } from "../../config/config";
 import Card from "../../components/Event/Card";
 import { IoCloseSharp } from "react-icons/io5";
 import { Header } from "../../components/Header/Header";
+import { useEffect, useState } from "react";
+import { GET_ALL_EVENTS_API } from "../../config/apis";
 import { EventBox } from "../../components/EventBox/EventBox";
 
 export function EventPage() {
@@ -13,6 +14,38 @@ export function EventPage() {
      const [price, setPrice] = useState(500);
      const [showFilter, setShowFilter] = useState(false);
      const[inputSearch,setInputSearch]=useState("");
+     const [eventList,setEventList] = useState([]);
+    const [pageInfo, setPageInfo] = useState({});
+
+         useEffect(() => {
+             const loadAllEvents = async () => {
+                 const response = await GET_ALL_EVENTS_API();
+                  const transformedEvents = response.data?.content.map(event => ({
+        id: event.id,
+        name: event.eventName,
+        description: event.description,
+        startDate: event.eventStartDate,
+        endDate: event.eventEndDate,
+        price: event.eventPrice,
+        strike_price: event.eventStrikePrice,
+        status: event.eventStatus,
+        type: event.eventType,
+        location: event.location,
+        imageUrl: event.imageUrl,
+        participants: event.noOfParticipants
+      }));
+      setEventList(transformedEvents);
+        setPageInfo({
+          page: response.data.page,
+          size: response.data.size,
+          totalElements: response.data.totalElements,
+          totalPages: response.data.totalPages,
+          last: response.data.last
+        });
+                 console.log("Event page data:-", response?.data.content[0]);
+             }
+             loadAllEvents();
+         },[])
 
   const renderContent = () => {
     switch (activeTab) {
@@ -62,7 +95,7 @@ export function EventPage() {
                 <div className="popup-right">{renderContent()}</div>
              </div>
             }
-            <EventBox EVENT_LIST={EVENT_DETAILS} inputSearch = {inputSearch}/>
+            <EventBox EVENT_LIST={eventList} inputSearch = {inputSearch}/>
         </div>
         </>
     )

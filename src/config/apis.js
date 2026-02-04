@@ -13,3 +13,7 @@ export const SIGNUP_API = (signupData,isUpdateUser) => api.post('user', signupDa
 
 export const GET_USER_INFO_API = () => api.get('user');
 
+export const CREATE_EVENT_API = (eventData) => api.post('event', eventData);
+
+export const GET_ALL_EVENTS_API = () => api.get('event');
+
