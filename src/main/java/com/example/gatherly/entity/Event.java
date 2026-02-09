@@ -19,7 +19,10 @@ import lombok.Setter;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity(name = "event")
 @Getter
@@ -46,11 +49,17 @@ public class Event extends TenantBaseEntity{
     @Column(name = "event_type")
     @Enumerated(EnumType.STRING)
     private EventType eventType;
+    @Column(name = "tickets_available")
+    private Integer ticketsAvailable;
+    @Column(name = "tickets_booked")
+    private Integer ticketsBooked = 0;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "host_id", nullable = false)
     private User user;
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Ticket> tickets;
+    private List<Ticket> tickets = new ArrayList<>();
+   @OneToMany(mappedBy = "event")
+   private Set<EventUser> usersParticipated = new HashSet<>();
 
    /**
     * @see {@link com.example.gatherly.dtos.EventAdditionalData}

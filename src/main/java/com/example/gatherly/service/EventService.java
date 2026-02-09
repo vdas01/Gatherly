@@ -4,26 +4,33 @@ import com.example.gatherly.dtos.EventAdditionalData;
 import com.example.gatherly.dtos.EventDto;
 import com.example.gatherly.dtos.PageResponse;
 import com.example.gatherly.entity.Event;
+import com.example.gatherly.entity.Ticket;
 import com.example.gatherly.entity.User;
 import com.example.gatherly.exception.ProgramException;
 import com.example.gatherly.mappers.EventMapper;
 import com.example.gatherly.repository.EventRepository;
+import com.example.gatherly.repository.TicketRepository;
 import com.example.gatherly.repository.UserRepository;
 import com.example.gatherly.utils.ObjectMapperUtils;
+import com.example.gatherly.utils.SecurityUtil;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class EventService {
    private final EventRepository eventRepository;
    private final UserRepository userRepository;
+   private final TicketRepository ticketRepository;
 
    public PageResponse<EventDto> getAllEvents(Pageable pageable) {
       //keep a window of past 10 days and ahead of 15 days events
@@ -57,13 +64,30 @@ public class EventService {
       EventMapper.INSTANCE.eventDtoToEvent(eventDto, event);
       event.setAdditionalData(ObjectMapperUtils.convertDtoToJson(additionalData));
       event.setUser(user);
-     return EventMapper.INSTANCE.eventToEventDto(eventRepository.saveAndFlush(event));
+     return EventMapper.INSTANCE.eventToEventDto(eventRepository.save(event));
    }
 
    public EventDto getEventById(Long id) {
       return eventRepository.findById(id)
          .map(EventMapper.INSTANCE::eventToEventDto)
          .orElseThrow(() -> new ProgramException("No event found for id," + id));
+   }
+
+   @Transactional
+   public String registerEvent(Long eventId, Integer noOfTickets) {
+      log.info("Register event with id {}, noOfTickets {}", eventId, noOfTickets);
+      String username = SecurityUtil.getUserName();
+      Event event = eventRepository.findById(eventId).
+         orElseThrow(() -> new ProgramException("No event found for id," + eventId));
+      User user = userRepository.findByUserName(username).
+         orElseThrow(() -> new ProgramException("Username not found"));
+      Ticket ticket = new Ticket();
+      ticket.setTicketPrice(event.getEventPrice());
+      ticket.setQuantity(noOfTickets);
+      ticket.setUser(user);
+      ticket.setEvent(event);
+      ticketRepository.save(ticket);
+      return "Event registered successfull";
    }
 
 }

@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
+
 @Entity
 @Getter
 @Setter
@@ -12,7 +14,7 @@ public class Ticket extends TenantBaseEntity{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "ticket_price")
-    private Long ticketPrice;
+    private BigDecimal ticketPrice;
     @Column(name = "quantity")
     private Integer quantity;
     @ManyToOne(fetch = FetchType.LAZY)

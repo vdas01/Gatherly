@@ -17,11 +17,13 @@ public interface EventMapper {
 
    @Mapping(source = "eventDescription",target = "description")
    @Mapping(target = "location", source = "eventLocation")
+   @Mapping(target = "noOfParticipants", source = "ticketsAvailable")
    EventDto eventToEventDto(Event event);
 
    @Mapping(source = "description",target = "eventDescription")
    @Mapping(target = "id",ignore = true)
    @Mapping(source = "location", target = "eventLocation")
+   @Mapping(source = "noOfParticipants", target = "ticketsAvailable")
    void eventDtoToEvent(EventDto eventDto, @MappingTarget Event event);
 
 

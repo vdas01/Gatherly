@@ -8,6 +8,5 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 public class EventAdditionalData {
-   private Long noOfParticipants;
    private String imageUrl;
 }
