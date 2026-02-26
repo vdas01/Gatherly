@@ -39,4 +39,11 @@ public class EventController {
    public ResponseEntity<String> registerEvent(@PathVariable Long eventId, @RequestParam Integer tickets) {
       return ResponseEntity.ok(eventService.registerEvent(eventId,tickets));
    }
+
+   @GetMapping("/mail")
+   public ResponseEntity<String> sendMail(@RequestParam String to, @RequestParam String subject, @RequestParam String message
+   ,@RequestParam String from) {
+      String response =  eventService.sendMail(to, subject, message, from);
+      return ResponseEntity.ok(response);
+   }
 }

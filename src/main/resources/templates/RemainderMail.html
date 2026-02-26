@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+    <style>
+        main{
+            border: 2px solid black;
+            padding: 2vh 2vw;
+            width: 95vw;
+        }
+        h4{
+            font-size: 1.8rem;
+        }
+        p{
+            font-size:1.2rem;
+            font-style: italic;
+        }
+        h6{
+            line-height: 0;
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+<main>
+    <h4 th:text=" 'Hi ' + ${mailDto.userName} + ','">Hi Vishal,</h4>
+    <p th:text="You have {mailDto.eventName} event today at {mailDto.eventLocation} at {mailDto.eventTime}.">
+        You have Dinner event today at Kormangla at 7pm
+    </p>
+
+    <h6 th:text="Regards">Regards</h6>
+    <h6 th:text="Gatherly">Gatherly</h6>
+</main>
+</body>
+</html>

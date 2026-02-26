@@ -35,13 +35,15 @@ public class SecurityConfig {
          .csrf(AbstractHttpConfigurer::disable)
          .authorizeHttpRequests(auth -> auth
             .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
-            .requestMatchers("/api/user/login","/api/user/refresh").permitAll()
+            .requestMatchers("/api/user/login","/api/user/refresh","/api/event/mail").permitAll()
             .requestMatchers(HttpMethod.POST, "/api/user").permitAll()
             .anyRequest().authenticated()
          )
          .sessionManagement(sess ->
             sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-         );
+         )
+         .oauth2Login(Customizer.withDefaults())
+         .formLogin(Customizer.withDefaults());
 
       http.addFilterBefore(jwtAuthFilter,
          UsernamePasswordAuthenticationFilter.class);

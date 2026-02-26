@@ -18,6 +18,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,6 +33,7 @@ public class EventService {
    private final EventRepository eventRepository;
    private final UserRepository userRepository;
    private final TicketRepository ticketRepository;
+   private final JavaMailSender mailSender;
 
    public PageResponse<EventDto> getAllEvents(Pageable pageable) {
       //keep a window of past 10 days and ahead of 15 days events
@@ -88,6 +91,21 @@ public class EventService {
       ticket.setEvent(event);
       ticketRepository.save(ticket);
       return "Event registered successfull";
+   }
+
+   public String sendMail(String to,String subject,String message,String from){
+      SimpleMailMessage mailMessage = new SimpleMailMessage();
+      mailMessage.setTo(to);
+      mailMessage.setSubject(subject);
+      mailMessage.setText(message);
+      mailMessage.setFrom(from);
+      try{
+         mailSender.send(mailMessage);
+      }catch (Exception e){
+         log.error(e.getMessage());
+         throw new ProgramException(HttpStatus.INTERNAL_SERVER_ERROR,"Unable to send mail, " + e.getMessage());
+      }
+     return "Mail sent successfully";
    }
 
 }
