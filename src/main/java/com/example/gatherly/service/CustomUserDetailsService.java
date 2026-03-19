@@ -34,19 +34,21 @@ public class CustomUserDetailsService implements UserDetailsService {
       Set<String> authoritiesSet = new HashSet<>();
       List<Roles> rolesList = new ArrayList<>();
 
-      Arrays.stream(user.getCustomRolesAuthorities().split(","))
-         .map(String::trim)
-         .forEach(value -> {
-            if (value.startsWith("ROLE_")) {
-               Roles role = EnumUtils.getEnum(Roles.class, value);
-               if (role != null) {
-                  rolesList.add(role);
-                  authoritiesSet.add(role.name()); // important
-               }
-            } else {
-               authoritiesSet.add(value);
-            }
-         });
+     if(user.getCustomRolesAuthorities() != null){
+        Arrays.stream( user.getCustomRolesAuthorities().split(","))
+           .map(String::trim)
+           .forEach(value -> {
+              if (value.startsWith("ROLE_")) {
+                 Roles role = EnumUtils.getEnum(Roles.class, value);
+                 if (role != null) {
+                    rolesList.add(role);
+                    authoritiesSet.add(role.name()); // important
+                 }
+              } else {
+                 authoritiesSet.add(value);
+              }
+           });
+     }
 
 
       rolesList.forEach(role ->

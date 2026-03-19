@@ -2,7 +2,9 @@ package com.example.gatherly.controller;
 
 import com.example.gatherly.dtos.EventDto;
 import com.example.gatherly.dtos.PageResponse;
+import com.example.gatherly.service.EventScheduler;
 import com.example.gatherly.service.EventService;
+import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/event")
 public class EventController {
    private final EventService eventService;
+   private final EventScheduler eventScheduler;
 
    @GetMapping
    public PageResponse<EventDto> getAllEvents(Pageable pageable) {
@@ -42,8 +45,8 @@ public class EventController {
 
    @GetMapping("/mail")
    public ResponseEntity<String> sendMail(@RequestParam String to, @RequestParam String subject, @RequestParam String message
-   ,@RequestParam String from) {
-      String response =  eventService.sendMail(to, subject, message, from);
-      return ResponseEntity.ok(response);
+   ,@RequestParam String from) throws MessagingException {
+      eventScheduler.sendRemainderEmailToUser();
+      return ResponseEntity.ok("ok");
    }
 }

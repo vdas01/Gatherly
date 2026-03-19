@@ -18,10 +18,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.thymeleaf.spring6.SpringTemplateEngine;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
@@ -34,6 +34,7 @@ public class EventService {
    private final UserRepository userRepository;
    private final TicketRepository ticketRepository;
    private final JavaMailSender mailSender;
+   private final SpringTemplateEngine springTemplateEngine;
 
    public PageResponse<EventDto> getAllEvents(Pageable pageable) {
       //keep a window of past 10 days and ahead of 15 days events
@@ -93,19 +94,23 @@ public class EventService {
       return "Event registered successfull";
    }
 
-   public String sendMail(String to,String subject,String message,String from){
-      SimpleMailMessage mailMessage = new SimpleMailMessage();
-      mailMessage.setTo(to);
-      mailMessage.setSubject(subject);
-      mailMessage.setText(message);
-      mailMessage.setFrom(from);
-      try{
-         mailSender.send(mailMessage);
-      }catch (Exception e){
-         log.error(e.getMessage());
-         throw new ProgramException(HttpStatus.INTERNAL_SERVER_ERROR,"Unable to send mail, " + e.getMessage());
-      }
-     return "Mail sent successfully";
-   }
+//   public String sendMail(String to,String subject,String m,String from) throws MessagingException {
+//      Context context = new Context();
+//      context.setVariable("mailDto", new MailDto(to,subject,m,from));
+//      String content = springTemplateEngine.process("RemainderMail.html", context);
+//      MimeMessage message = mailSender.createMimeMessage();
+//      MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
+//      helper.setFrom(from);
+//      helper.setTo(to);
+//      helper.setSubject(subject);
+//      helper.setText(content, true);
+//      try{
+//         mailSender.send(message);
+//      }catch (Exception e){
+//         log.error(e.getMessage());
+//         throw new ProgramException(HttpStatus.INTERNAL_SERVER_ERROR,"Unable to send mail, " + e.getMessage());
+//      }
+//     return "Mail sent successfully";
+//   }
 
 }

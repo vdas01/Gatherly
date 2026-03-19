@@ -1,5 +1,7 @@
 package com.example.gatherly.configs;
 
+import com.example.gatherly.utils.JwtUtil;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -13,6 +15,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -27,6 +30,7 @@ import java.util.List;
 public class SecurityConfig {
    private final AuthenticationConfiguration authenticationConfiguration;
    private final JwtAuthFilter jwtAuthFilter;
+   private final JwtUtil jwtUtil;
 
    @Bean
    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -42,8 +46,28 @@ public class SecurityConfig {
          .sessionManagement(sess ->
             sess.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
          )
-         .oauth2Login(Customizer.withDefaults())
-         .formLogin(Customizer.withDefaults());
+         .exceptionHandling(ex -> ex
+            .authenticationEntryPoint((request, response, authException) -> {
+               response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+               response.setContentType("application/json");
+               response.getWriter().write("{\"error\": \"Unauthorized\"}");
+            })
+         )
+         .oauth2Login(oauth -> oauth
+            .successHandler((request, response, authentication) -> {
+
+               OAuth2User oAuth2User = (OAuth2User) authentication.getPrincipal();
+
+               String email = oAuth2User.getAttribute("email");
+
+               String token = jwtUtil.generateAccessToken(email);
+
+
+               response.sendRedirect("http://localhost:5173/oauth-success?token=" + token);
+            })
+         )
+         .formLogin(AbstractHttpConfigurer::disable);
+
 
       http.addFilterBefore(jwtAuthFilter,
          UsernamePasswordAuthenticationFilter.class);
@@ -62,9 +86,8 @@ public class SecurityConfig {
       config.setAllowedHeaders(List.of("*"));
       config.setAllowCredentials(true);
 
-      UrlBasedCorsConfigurationSource source =
-         new UrlBasedCorsConfigurationSource();
-      source.registerCorsConfiguration("/api/**", config);
+      UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+      source.registerCorsConfiguration("/**", config);
 
       return source;
    }

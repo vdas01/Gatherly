@@ -30,6 +30,17 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                                    FilterChain filterChain)
       throws ServletException, IOException {
 
+      String path = request.getServletPath();
+
+      if (path.startsWith("/oauth2") ||
+         path.startsWith("/login") ||
+         path.startsWith("/api/user/login") ||
+         path.startsWith("/api/user/refresh")) {
+
+         filterChain.doFilter(request, response);
+         return;
+      }
+
       String authHeader = request.getHeader("Authorization");
 
       if (authHeader != null && authHeader.startsWith("Bearer ")) {
@@ -45,7 +56,9 @@ public class JwtAuthFilter extends OncePerRequestFilter {
                new UsernamePasswordAuthenticationToken(
                   userDetails, null, userDetails.getAuthorities());
 
-            SecurityContextHolder.getContext().setAuthentication(auth);
+            if (SecurityContextHolder.getContext().getAuthentication() == null) {
+               SecurityContextHolder.getContext().setAuthentication(auth);
+            }
          }
       }
 

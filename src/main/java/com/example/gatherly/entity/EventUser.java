@@ -15,7 +15,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
 import lombok.Getter;
 
-@Entity(name = "event_users")
+@Entity
 @Table(
    name = "event_users",
    uniqueConstraints = {

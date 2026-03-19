@@ -25,9 +25,8 @@
 </head>
 <body>
 <main>
-    <h4 th:text=" 'Hi ' + ${mailDto.userName} + ','">Hi Vishal,</h4>
-    <p th:text="You have {mailDto.eventName} event today at {mailDto.eventLocation} at {mailDto.eventTime}.">
-        You have Dinner event today at Kormangla at 7pm
+    <h4 th:text=" 'Hi ' + ${mailDto.username} + ','"></h4>
+    <p th:text="|You have ${mailDto.eventName} event today at ${mailDto.eventLocation} at ${mailDto.eventTime}.|">
     </p>
 
     <h6 th:text="Regards">Regards</h6>
