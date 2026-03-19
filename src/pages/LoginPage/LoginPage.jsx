@@ -7,13 +7,11 @@ import { useNavigate } from "react-router-dom";
 import { Navbar } from "../../components/Navbar/Navbar";
 import { LOGIN_API } from "../../config/apis";
 import { Toast } from "../../components/Toast/Toast";
+ import { GoogleLogin } from '@react-oauth/google';
 
 export function LoginPage (){
     const navigate = useNavigate();
-     const [loginData, setLoginData] = useState({
-            username: "",
-            password: ""
-          });
+     const [loginData, setLoginData] = useState({username: "",password: ""});
     const { setAccessToken } = useContext(AuthContext);
     const [responseData, setResponseData] = useState(null);
 
@@ -58,17 +56,21 @@ export function LoginPage (){
                     {responseData?.message && (
                             <Toast message={responseData.message} onClose={() => setResponseData(null)} className="error"/>
                     )}  
-                    <button className="input_btn" id="sign_in_btn" onClick={handleSignIn} disabled = {loginData.username && loginData.password ? false : true}>Sign In</button>
+                    <button className="input_btn" id="sign_in_btn" onClick={handleSignIn} disabled = {loginData.username && loginData.password 
+                        ? false : true}>Sign In</button>
                     <p className="info_text">OR CONTINUE WITH</p>
 
                     <span id="apple_login_container" >
                         <IoLogoApple/>
                         <p>Sign in with Apple</p>
                     </span>
-                    <span id="google_login_container" >
+                    {/* <span id="google_login_container" >
                         <IoLogoGoogle/>
                         <p>Sign in with Google</p>
-                    </span>
+                    </span> */}
+                   
+                    <GoogleLogin onSuccess={(credentialResponse) => {console.log(credentialResponse);}} 
+                    onError={() => console.log("Login Failed")}/>
                 </div>
                 {/* <div id="right_login_box">
                    <img src={LoginLogo} alt="login_logo" id="login_img"/>

@@ -17,6 +17,7 @@ export function ProfilePage() {
             setUserData(response.data);
             console.log("User data fetched:", response.data);
         }
+        console.log("Username from context:", username);
         fetchUserData(username);
     }, [username]);
 

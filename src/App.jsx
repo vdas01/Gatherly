@@ -8,6 +8,7 @@ import { Subscription } from './pages/SubscriptionPage/Subscription'
 import { EventDetails } from './pages/EventDetailsPage/EventDetails'
 import { CreateEventPage } from './pages/CreateEventPage/CreateEventPage'
 import { ProfilePage } from './pages/ProfilePage/ProfilePage'
+import OAuthSuccess from './components/OAuth/OAuth'
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
       <Route path='/events/:id' element={<EventDetails/>} />
       <Route path='/createEvent' element={<CreateEventPage/>} />
       <Route path='/profile' element={<ProfilePage/>} />
+      <Route path="/oauth-success" element={<OAuthSuccess />} />
     </Routes>
     </>
   )

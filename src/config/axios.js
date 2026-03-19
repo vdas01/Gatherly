@@ -2,7 +2,7 @@ import axios from "axios";
 import { GET_CURRENT_LOCATION } from "./config";
 
 const api = axios.create({
-    baseURL: import.meta.env.VITE_API_BASE_URL || "http://localhost:8080/api/",
+    baseURL: import.meta.env.VITE_API_BASE_URL || "/api/",
     timeout: 10000,
     headers: {
     "Content-Type": "application/json"
@@ -17,25 +17,32 @@ api.interceptors.request.use(async (config) => {
   return config;
 });
 
-axios.interceptors.response.use(
+api.interceptors.response.use(
   res => res,
   async err => {
     const originalRequest = err.config;
 
     if (
-      err.response?.status === 403 &&
+      err.response?.status === 401 &&
       !originalRequest._retry &&
-      !originalRequest.url.includes("/auth/refresh")
+      !originalRequest.url.includes("/user/refresh")
     ) {
       originalRequest._retry = true;
 
-      const refresh = await axios.post(
-        "/auth/refresh",
+      const refresh = await api.post(
+        "/user/refresh",
         {},
         { withCredentials: true }
       );
 
-      setAccessToken(refresh.data.accessToken);
+      const newToken = refresh.data?.accessToken;
+      if (newToken) {
+        sessionStorage.setItem("accessToken", newToken);
+      }
+
+      originalRequest.headers["Authorization"] = `Bearer ${newToken}`;
+
+      setAccessToken(newToken);
 
       return axios(originalRequest);
     }
