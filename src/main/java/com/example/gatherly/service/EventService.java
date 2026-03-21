@@ -72,9 +72,12 @@ public class EventService {
    }
 
    public EventDto getEventById(Long id) {
-      return eventRepository.findById(id)
-         .map(EventMapper.INSTANCE::eventToEventDto)
-         .orElseThrow(() -> new ProgramException("No event found for id," + id));
+      Event event =  eventRepository.findById(id)
+         .orElseThrow(() -> new ProgramException(HttpStatus.NOT_FOUND,"No event found for id," + id));
+      EventAdditionalData additionalData =  ObjectMapperUtils.convertJsonToObjectWithDefault(event.getAdditionalData(), EventAdditionalData.class);
+      EventDto eventDto = EventMapper.INSTANCE.eventToEventDto(event);
+      eventDto.setDiscountPrice(additionalData.getDiscountPrice());
+      return eventDto;
    }
 
    @Transactional

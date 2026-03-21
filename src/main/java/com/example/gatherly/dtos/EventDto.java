@@ -22,6 +22,7 @@ public class EventDto {
    @JsonFormat(pattern = "dd-MM-yyyy HH:mm")
    private LocalDateTime eventEndDate;
    private BigDecimal eventPrice;
+   private BigDecimal discountPrice;
    private EventStatus eventStatus = EventStatus.AVAILABLE;
    private EventType eventType;
    private Long noOfParticipants;

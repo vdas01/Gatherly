@@ -31,6 +31,7 @@ public class SecurityConfig {
    private final AuthenticationConfiguration authenticationConfiguration;
    private final JwtAuthFilter jwtAuthFilter;
    private final JwtUtil jwtUtil;
+   private final LocationFilter locationFilter;
 
    @Bean
    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
@@ -40,7 +41,7 @@ public class SecurityConfig {
          .authorizeHttpRequests(auth -> auth
             .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
             .requestMatchers("/api/user/login","/api/user/refresh","/api/event/mail").permitAll()
-            .requestMatchers(HttpMethod.POST, "/api/user").permitAll()
+//            .requestMatchers(HttpMethod.POST, "/api/user").permitAll()
             .anyRequest().authenticated()
          )
          .sessionManagement(sess ->
@@ -50,7 +51,16 @@ public class SecurityConfig {
             .authenticationEntryPoint((request, response, authException) -> {
                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
                response.setContentType("application/json");
-               response.getWriter().write("{\"error\": \"Unauthorized\"}");
+               response.getWriter().write(
+                  "{\"error\": \"" + authException.getMessage() + "\"}"
+               );
+            })
+            .accessDeniedHandler((request, response, accessDeniedException) -> {
+               response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+               response.setContentType("application/json");
+               response.getWriter().write(
+                  "{\"error\": \"" + accessDeniedException.getMessage() + "\"}"
+               );
             })
          )
          .oauth2Login(oauth -> oauth
@@ -69,8 +79,8 @@ public class SecurityConfig {
          .formLogin(AbstractHttpConfigurer::disable);
 
 
-      http.addFilterBefore(jwtAuthFilter,
-         UsernamePasswordAuthenticationFilter.class);
+      http.addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+      http.addFilterAfter(locationFilter, JwtAuthFilter.class);
 
       return http.build();
    }

@@ -21,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service
@@ -30,6 +31,7 @@ public class SubscriptionService {
    private final FeatureConfigRepository featureConfigRepository;
    private final SubscriptionRepository subscriptionRepository;
    private final UserRepository userRepository;
+   private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
    @Transactional
    public String registerSubscription(SubscriptionType subscriptionType) throws JsonProcessingException {
@@ -46,12 +48,24 @@ public class SubscriptionService {
          .findFirst().orElseThrow(() -> new ProgramException(HttpStatus.NOT_FOUND,"Subscription config not found for subscription type: " + subscriptionType.name()));
       Subscription subscription = new Subscription();
       subscription.setSubscriptionType(subscriptionType);
-      subscription.setSubscriptionPrice(subscriptionConfigDto.getPrice());
+      subscription.setSubscriptionPrice(subscriptionConfigDto.getDiscountPrice());
       subscription.setSubscriptionStatus(SubscriptionStatus.ACTIVE);
       subscription.setSubscriptionEndTime(LocalDateTime.now().plusMonths(SubscriptionType.getValidityPeriod(subscriptionType)));
       subscription.setUser(user);
       subscriptionRepository.save(subscription);
       return "Subscribed";
+   }
+
+   public List<SubscriptionConfigDto> getSubscriptionList() throws JsonProcessingException {
+      FeatureConfig featureConfig = featureConfigRepository.findByFeatureName(FeatureName.SUBSCRIPTION_DATA)
+         .orElseThrow(() -> new RuntimeException("Feature config not found for feature name: " + FeatureName.SUBSCRIPTION_DATA));
+      return objectMapper.readValue(featureConfig.getConfig(),new TypeReference<List<SubscriptionConfigDto>>() {});
+   }
+
+   public SubscriptionConfigDto getSubscriptionById(Long id) throws JsonProcessingException {
+      List<SubscriptionConfigDto> subscriptionConfigDtoList = getSubscriptionList();
+     return  subscriptionConfigDtoList.stream().filter(subscriptionConfigDto ->
+         id.equals(subscriptionConfigDto.getId())).findFirst().orElse(null);
    }
 
 
