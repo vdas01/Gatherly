@@ -35,7 +35,7 @@ public class PaymentService {
       return response;
    }
 
-   public ResponseEntity<String> verifyPayment(Map<String, String> payload){
+   public ResponseEntity<String> verifyPayment(Map<String, String> payload) throws RazorpayException {
       String orderId = payload.get("orderId");
       String paymentId = payload.get("paymentId");
       String signature = payload.get("signature");
