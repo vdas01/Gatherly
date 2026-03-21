@@ -56,7 +56,7 @@ export default function Card({ event,isPurchaseButton }) {
             <div id="event_details_box">
               <p>
                {isPurchaseButton ? (
-                    <Link to={`/events/${event.id}`} id="event_text_details">
+                    <Link to={`/events/${event.id}`} id="event_text_details" onClick={handlePayment}>
                         Purchase
                     </Link>
                   ) : (
