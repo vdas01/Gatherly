@@ -17,3 +17,7 @@ export const CREATE_EVENT_API = (eventData) => api.post('event', eventData);
 
 export const GET_ALL_EVENTS_API = () => api.get('event');
 
+export const GET_EVENT_DETAILS_API = (eventId) => api.get(`event/${eventId}`);
+
+export const GET_ALL_SUBSCRIPTIONS_API = () => api.get('subscription');
+

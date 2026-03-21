@@ -6,7 +6,28 @@ import { FaArrowRight } from "react-icons/fa6";
 import { Info } from "./Info";
 import { MdCurrencyRupee } from "react-icons/md";
 
-export default function Card({ event }) {
+export default function Card({ event,isPurchaseButton }) {
+  const handlePayment = async () => {
+    const res = await fetch("/payment/create-order?amount=500");
+    const data = await res.json();
+
+    const options = {
+      key: "YOUR_KEY",
+      amount: data.amount,
+      currency: "INR",
+      order_id: data.orderId,
+      handler: async function (response) {
+        await fetch("/payment/verify", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify(response),
+        });
+      },
+    };
+
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  };
   return (
     <>
       <div id="event">
@@ -34,9 +55,15 @@ export default function Card({ event }) {
             </div>
             <div id="event_details_box">
               <p>
-                <Link to={`/events/${event.id}`} id="event_text_details">
-                  View Details
-                </Link>
+               {isPurchaseButton ? (
+                    <Link to={`/events/${event.id}`} id="event_text_details">
+                        Purchase
+                    </Link>
+                  ) : (
+                    <Link to={`/events/${event.id}`} id="event_text_details">
+                        View Details
+                    </Link>
+                  )}
               </p>
               <FaArrowRight />
             </div>

@@ -1,10 +1,7 @@
 import "./EventBox.css";
 import Card from "../../components/Event/Card";
 
-export function EventBox({ EVENT_LIST,inputSearch }) {
-  {
-    console.log(EVENT_LIST);
-  }
+export function EventBox({ EVENT_LIST,inputSearch,isPurchaseButton }) {
   return (
     <div id="event_box">
       {
@@ -14,7 +11,7 @@ export function EventBox({ EVENT_LIST,inputSearch }) {
             content?.description?.toLowerCase().includes(inputSearch.trim().toLowerCase()) ||
             content?.location?.toLowerCase().includes(inputSearch.trim().toLowerCase())
           )
-          .map(card => <Card key={card.id} event={card} />)
+          .map(card => <Card key={card.id} event={card} isPurchaseButton={isPurchaseButton} />)
       }
     </div>
   );

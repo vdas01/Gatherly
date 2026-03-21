@@ -4,15 +4,26 @@ import { Header } from "../../components/Header/Header";
 import { MdCurrencyRupee } from "react-icons/md";
 import { FaCircleMinus } from "react-icons/fa6";
 import { AiFillPlusCircle } from "react-icons/ai";
-import { useState } from "react";
+import {  useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import { GET_EVENT_DETAILS_API } from "../../config/apis";
 
-export function EventDetails({ heading }) {
+export function EventDetails() {
   const [ticketQuantity, setTicketQuantity] = useState(1);
+  const [eventDetails, setEventDetails] = useState({});
+  const {id} = useParams();
+  useEffect(() => {
+    const loadEventDetails = async () => {
+        const response = await GET_EVENT_DETAILS_API(id);
+        setEventDetails(response.data);
+    };
+    loadEventDetails();
+  }, []);
   return (
     <>
       <div id="event_details_container">
         <Navbar />
-        <Header heading={"Board Games Night in Kormangla"} subHeading={""} />
+        <Header heading={`${eventDetails.eventType} at ${eventDetails.location}`} subHeading={""} />
         <div id="middle_box">
           <div id="desc_box">
             About this event <br /><br/> Board Games Night Board Games Night is all
@@ -46,17 +57,17 @@ export function EventDetails({ heading }) {
             <div id="event_price">
               <span id="strike_price">
                 <MdCurrencyRupee />
-                <h6 id="strike_money">77</h6>
+                <h6 id="strike_money">{eventDetails.eventPrice}</h6>
               </span>
               <span id="real_price">
                 <MdCurrencyRupee />
-                <h6 id="real_price_text">499</h6>
+                <h6 id="real_price_text">{eventDetails.discountPrice}</h6>
               </span>
             </div>
             <p id="quantity_head">Select quantity</p>
             <div id="middle">
               <div id="middle_left">
-                <span id="ticket_quant">{ticketQuantity}</span> x rs499
+                <span id="ticket_quant">{ticketQuantity}</span> x Rs{eventDetails.discountPrice}
               </div>
               <div id="middle_right">
                 <FaCircleMinus
@@ -72,7 +83,7 @@ export function EventDetails({ heading }) {
               <p id="total_quantity_text">Total (incl. selected quantity)</p>
               <p id="total_price">
                 <MdCurrencyRupee />
-                {ticketQuantity * 499}
+                {ticketQuantity * eventDetails.discountPrice}
               </p>
             </div>
             <button id="checkout_btn">Checkout</button>

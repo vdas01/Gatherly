@@ -42,7 +42,7 @@ export function EventPage() {
           totalPages: response.data.totalPages,
           last: response.data.last
         });
-                 console.log("Event page data:-", response?.data.content[0]);
+               
              }
              loadAllEvents();
          },[])
@@ -95,7 +95,7 @@ export function EventPage() {
                 <div className="popup-right">{renderContent()}</div>
              </div>
             }
-            <EventBox EVENT_LIST={eventList} inputSearch = {inputSearch}/>
+            <EventBox EVENT_LIST={eventList} inputSearch = {inputSearch} isPurchaseButton={false}/>
         </div>
         </>
     )
