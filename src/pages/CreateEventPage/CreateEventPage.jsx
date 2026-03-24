@@ -34,15 +34,12 @@ export function CreateEventPage() {
   }
 
   const submitEventData = async(e) =>{
-    console.log("clicked");
     e.preventDefault();
     if (!isValidData()) {
       alert("Please fill in all fields.");
       return;
     }
-    console.log("Event Data Submitted:", eventData);
     const response = await CREATE_EVENT_API(eventData);
-    console.log("Event created successfully:", response.data);
   }
 
  return (

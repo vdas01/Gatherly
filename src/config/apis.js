@@ -21,3 +21,11 @@ export const GET_EVENT_DETAILS_API = (eventId) => api.get(`event/${eventId}`);
 
 export const GET_ALL_SUBSCRIPTIONS_API = () => api.get('subscription');
 
+export const CREATE_ORDER_API = (orderData) => api.post('payment/create-order', orderData);
+
+export const UPDATE_ORDER_API = (sessionId, paymentStatus) => api.get('payment/update-order', {
+    params: {
+        sessionId,
+        paymentStatus
+    }
+});

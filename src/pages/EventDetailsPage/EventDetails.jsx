@@ -6,12 +6,19 @@ import { FaCircleMinus } from "react-icons/fa6";
 import { AiFillPlusCircle } from "react-icons/ai";
 import {  useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { GET_EVENT_DETAILS_API } from "../../config/apis";
+import { CREATE_ORDER_API, GET_EVENT_DETAILS_API } from "../../config/apis";
 
 export function EventDetails() {
   const [ticketQuantity, setTicketQuantity] = useState(1);
+  const [eventData, setEventData] = useState({
+    amount: 0,
+    quantity:0,
+    productName: ""
+  });
   const [eventDetails, setEventDetails] = useState({});
   const {id} = useParams();
+
+
   useEffect(() => {
     const loadEventDetails = async () => {
         const response = await GET_EVENT_DETAILS_API(id);
@@ -19,6 +26,26 @@ export function EventDetails() {
     };
     loadEventDetails();
   }, []);
+
+  const handleCheckout = async (e) => {
+    e.preventDefault();
+    try {
+
+     setEventData({
+      amount: eventDetails.discountPrice,
+      quantity: ticketQuantity,
+      productName: eventDetails.eventName
+    });
+
+    const res = await CREATE_ORDER_API(eventData);
+    const { sessionUrl } = res.data;
+
+    window.location.href = sessionUrl;
+    } catch (error) {
+      console.error("Error creating checkout session", error);
+    }
+  };
+
   return (
     <>
       <div id="event_details_container">
@@ -86,7 +113,7 @@ export function EventDetails() {
                 {ticketQuantity * eventDetails.discountPrice}
               </p>
             </div>
-            <button id="checkout_btn">Checkout</button>
+            <button id="checkout_btn" onClick={handleCheckout}>Checkout</button>
           </div>
         </div>
       </div>

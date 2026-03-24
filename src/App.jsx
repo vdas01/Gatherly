@@ -9,6 +9,8 @@ import { EventDetails } from './pages/EventDetailsPage/EventDetails'
 import { CreateEventPage } from './pages/CreateEventPage/CreateEventPage'
 import { ProfilePage } from './pages/ProfilePage/ProfilePage'
 import OAuthSuccess from './components/OAuth/OAuth'
+import { PaymentSuccessPage } from './pages/PaymentPage/PaymentSuccessPage'
+import PaymentCancelledPage from './pages/PaymentPage/PaymentCancelledPage'
 
 function App() {
 
@@ -24,6 +26,8 @@ function App() {
       <Route path='/createEvent' element={<CreateEventPage/>} />
       <Route path='/profile' element={<ProfilePage/>} />
       <Route path="/oauth-success" element={<OAuthSuccess />} />
+       <Route path="/success" element={<PaymentSuccessPage />} />
+        <Route path="/cancel" element={<PaymentCancelledPage />} />
     </Routes>
     </>
   )
